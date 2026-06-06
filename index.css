@@ -491,6 +491,10 @@ a {
     justify-content: center;
     box-shadow: var(--shadow-lg), var(--shadow-neon);
     transition: var(--transition-normal);
+    cursor: grab;
+}
+.profile-image-container:active {
+    cursor: grabbing;
 }
 .profile-image-container:hover {
     border-color: var(--accent-cyan);
@@ -553,8 +557,33 @@ a {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    object-position: 50% 20%; /* Adjust photo crop position directly in code here (e.g., 50% 50% for center, 50% 20% to move up) */
     border-radius: 50%;
     z-index: 1;
+}
+
+.position-helper {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(10, 14, 23, 0.9);
+    border: 1.5px solid var(--accent-cyan);
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--accent-cyan);
+    z-index: 10;
+    pointer-events: none;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6);
+    white-space: nowrap;
+    animation: fadeInHelper 0.2s ease-out;
+}
+@keyframes fadeInHelper {
+    from { opacity: 0; transform: translate(-50%, 5px); }
+    to { opacity: 1; transform: translate(-50%, 0); }
 }
 
 .terminal-header {
@@ -1318,7 +1347,7 @@ a {
 
 .contact-details {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     gap: 24px;
     margin-bottom: 40px;
 }
@@ -1563,6 +1592,7 @@ a.value:hover {
         text-align: center;
     }
     .contact-details {
+        justify-content: center;
         align-items: center;
     }
     .social-links {
@@ -1573,6 +1603,10 @@ a.value:hover {
 @media (max-width: 768px) {
     :root {
         --navbar-height: 70px;
+    }
+
+    .hero-name {
+        font-size: 3rem;
     }
 
     .section-title {
@@ -1691,6 +1725,10 @@ a.value:hover {
 @media (max-width: 480px) {
     .hero-title {
         font-size: 2.25rem;
+    }
+    .hero-name {
+        font-size: 2.2rem;
+        white-space: nowrap;
     }
     .hero-subtitle-one-liner {
         font-size: 1.25rem;
